@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getReleases(url) {
-        get(url).then(function (data) {
+        get(url + '?token=oGvvoBpcYVfzcTUSrzDcubjqvYRtOaTfnQWVaTUO').then(function (data) {
             // Destructure the releases
             const { releases } = data;
             // Create  UL
@@ -45,8 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
             releases.map(function (release) {
                 // Create a list item
                 const listItem = document.createElement('li');
+                // create a button
+                const addToPlaylistBTN = document.createElement('button');
+                addToPlaylistBTN.type = 'button';
+                addToPlaylistBTN.textContent = "Add to Playlist";
                 // Add the release title to the list item
                 listItem.textContent = `${release.title} -  ${release.year}`;
+                listItem.appendChild(addToPlaylistBTN);
                 // Append the lisi item to the list
                 list.appendChild(listItem);
             });
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // This is an Immediately Invoked Function Expression aka IIFE (iffy)
     (function () {
-        get(`https://api.discogs.com/artists/${artistId}`).then(function (data) {
+        get(`https://api.discogs.com/artists/${artistId}?token=oGvvoBpcYVfzcTUSrzDcubjqvYRtOaTfnQWVaTUO`).then(function (data) {
             // Destructure our data
             const { name, releases_url } = data;
             // Call it back
@@ -64,3 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })();
 });
+
+
+// token=oGvvoBpcYVfzcTUSrzDcubjqvYRtOaTfnQWVaTUO
